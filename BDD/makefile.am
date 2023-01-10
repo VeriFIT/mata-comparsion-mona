@@ -1,0 +1,5 @@
+MAINTAINERCLEANFILES = makefile.in makefile
+noinst_LIBRARIES = libbdd.a
+libbdd_a_SOURCES = bdd.c bdd_cache.c bdd_double.c bdd_dump.c bdd_external.c \
+	bdd_manager.c bdd_trace.c hash.c
+noinst_HEADERS = bdd.h bdd_dump.h bdd_external.h bdd_internal.h hash.h

@@ -1,0 +1,4 @@
+MAINTAINERCLEANFILES = makefile.in makefile
+noinst_LIBRARIES = libmem.a
+libmem_a_SOURCES = dlmalloc.c mem.c
+noinst_HEADERS = dlmalloc.h gnuc.h mem.h

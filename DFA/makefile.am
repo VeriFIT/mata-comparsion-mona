@@ -1,0 +1,5 @@
+MAINTAINERCLEANFILES = makefile.in makefile
+noinst_LIBRARIES = libdfa.a
+libdfa_a_SOURCES = analyze.c basic.c dfa.c external.c makebasic.c minimize.c \
+	prefix.c printdfa.c product.c project.c quotient.c
+noinst_HEADERS = dfa.h hash.h
