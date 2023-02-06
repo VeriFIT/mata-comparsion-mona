@@ -297,6 +297,8 @@ DFA *mona_input (std::filesystem::path filename) {
 				exit(1);
 			}
 			initstate=a;
+			if (aut_states.size()<=a)
+				aut_states.resize(a+1);
 		}
 		if (nonfinals.size()==0) nonfinals=get_finals(s);
 		a=get_state(s);
