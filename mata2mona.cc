@@ -314,6 +314,8 @@ DFA *mona_input (std::filesystem::path filename) {
 			if (str[0]=='(') { str=str.substr(1); continue;}
 			if (str[0]==' ') { str=str.substr(1); continue;}
 			if (str[0]=='&') { str=str.substr(1); continue;}
+			/* remove true from the input */
+			if((str.find("true"))==0) {str=str.substr(4); continue; } 
 			if (((i1=get_pos_indice(str))!=-1) || ((i2=get_neg_indice(str))!=-1)) {
 				if (i1>maxindice) maxindice=i1;
 				if (i2>maxindice) maxindice=i2;
