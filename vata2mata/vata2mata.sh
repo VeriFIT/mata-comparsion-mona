@@ -31,7 +31,7 @@ substitute_line () {
 	while read a; do
 		symbol=`echo $a | sed "s/^ *\([^ (][^ (]*\).*/\1/"`
 		state2=`echo $a | sed "s/^.*-> *\([^ ][^ ]*\) */\1/"`
-		state1=`echo $a | sed "s/^.*( *\([^ )][^ )]\) *).*/\1/"`
+		state1=`echo $a | sed "s/^.*( *\([^ )][^ )]*\) *).*/\1/"`
 		bit_symbol=`grep "^$symbol:" "$ALPHA_MAP" | sed "s/^.*://"`
 		echo $state1 $bit_symbol $state2
 
