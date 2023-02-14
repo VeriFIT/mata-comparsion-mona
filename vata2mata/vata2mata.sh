@@ -18,14 +18,30 @@ else
 	exit
 fi
 
-grep "^Automaton .*" $1 | sed "s/^Automaton *\(.*\)$/%Section t\1 NFA Bits/"
+echo "@NFA-bits"
 
-init=`grep "^x *->" $1 | sed "s/.* ->\(.*\)$/\1/"`
-echo "%InitialFormula $init"
+init1=`grep "^x *->" $1 | sed "s/.* ->\(.*\)$/\1/"`
+init=`echo $init1 | sed "s/\([^ ]\)  *\([^ ]\)/\1 | \2/g"`
+echo "%Initial $init"
 
 final=`grep "^Final State" $1 | sed "s/^Final States \(.*\)$/\1/"`
 final=`echo $final | sed "s/\([^ ]\)  *\([^ ]\)/\1 | \2/g"`
-echo "%FinalFormula $final"
+#echo "%Final $final"
+
+# compute final states in negative form
+allstates=`grep "^States " $1 | sed "s/^States //"`
+
+echo -n "%Final "
+delimiter=""
+for i in $allstates; do
+	if echo $final | grep "^$i \| $i \| $i\$\|^$i\$" > /dev/null; then true; 
+	else 
+	echo -n "$delimiter!$i "
+	delimiter="& "
+	fi
+done
+echo
+
 
 substitute_line () {
 	while read a; do
