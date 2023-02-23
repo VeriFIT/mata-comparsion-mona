@@ -61,7 +61,23 @@ int main(int argc, char** argv) {
             line_stream >> token;
             unsigned res_aut_num = get_aut_num(token);
 	    //dfaPrintVerbose(num_to_aut[res_aut_num]);
-            if (MonaDFA_check_empty(num_to_aut[res_aut_num])) {
+            if (MonaDFA_check_empty(num_to_aut.at(res_aut_num))) {
+                std::cout << "EMPTY" << std::endl;
+                return 0;
+            } else {
+                std::cout << "NOT EMPTY" << std::endl;
+                return 0;
+            }
+        } else if (token == "incl") {
+            line_stream >> token;
+            DFA* smaller_aut = num_to_aut.at(get_aut_num(token));
+            line_stream >> token;
+            DFA* larger_aut = num_to_aut.at(get_aut_num(token));
+
+            DFA *larger_aut_comp=dfaCopy(larger_aut);
+            dfaNegation(larger_aut_comp);
+
+            if (MonaDFA_check_empty( MonaDFA_product( { smaller_aut, larger_aut_comp } ,dfaAND))) {
                 std::cout << "EMPTY" << std::endl;
                 return 0;
             } else {
